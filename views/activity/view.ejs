@@ -1,0 +1,29 @@
+<% include ../partials/header %>
+<div class="container-fluid">
+  <div class="row">
+    <% include ../partials/sidemenu %>
+
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+        <h1><strong>Activity</strong></h1>
+      </div>
+          <div class="card">
+            <div class="card-body">
+              <strong>Activity</strong>
+              <p>From <%= moment(sevenDaysBefore).format('DD/MM/YYYY') %> to <%= moment(today).format('DD/MM/YYYY') %> </p>
+              <% for (var key in data) { %>
+              <strong><%= data[key].date == moment(today).format('YYYY-MM-DD') ? 'Today' : key %></strong>
+              <ul>
+                <% data[key].data.forEach((item)=>{ %>
+                <li>
+                  <%= `${moment(item.time).format('HH:mm')} ${item.subject} #${item.issueid} (${item.status}) : ${item.description}, Author : ${item.fullname} ` %>
+                </li>
+              <%})%>
+                </ul>
+              <% } %>
+            </div>
+          </div>
+      </div>
+      </main>
+
+<% include ../partials/footer %>
